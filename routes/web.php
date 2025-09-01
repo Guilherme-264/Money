@@ -10,6 +10,7 @@ Route::get('/', function () {
 });
 
 Route::get('pago', [PagoController::class,'index']);
+Route::get('pago/meses', [PagoController::class, 'meses']);
 Route::get('pago/pago', [PagoController::class, 'pago']);
 Route::get('pago/create', [PagoController::class, 'create']);
 Route::post('pago', [PagoController::class, 'store']);

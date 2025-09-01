@@ -1,9 +1,7 @@
 A fazer
 
-    -formatação dos volores R$(alto)
-
-    -ver gastos mensais e anuais (médio)
-
+    -separar por mes despesas e receber
+        na tela principal, ao clicar em despesa por exemplo, o sistema exibira todos as despesas, ao ivé de apenas as despesas do mes atual
     -funcionalidade valor a receber ou a pagar no futuro
         ex financiamento, salario(médio)
 
@@ -29,4 +27,8 @@ Feito
     -menu
     -categoria
     -criar delet e edit do receber
+    -formatação dos volores R$
+    -ver gastos mensais e anuais (médio)
+
+
 

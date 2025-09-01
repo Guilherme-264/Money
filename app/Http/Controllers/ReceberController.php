@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Objetivo;
 use App\Models\Receber;
+use Carbon\Carbon;
+use Carbon\Month;
 use Illuminate\Http\Request;
 
 class ReceberController extends Controller
 {
     public function index()
     {
+        $mesAtual = Carbon::now()->month;
         $receber = Receber::all();
         $total_receber = 0;
     foreach( $receber as $entity){

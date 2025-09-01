@@ -9,7 +9,15 @@
     </head>
     <body>
         @include ('pagos.base')
-            <main class=" container-fluid  p-5 text-center bg-light">
+        <main class=" container-fluid  p-5 text-center bg-light">
+            <div class="card text-bg-secondary mx-auto " style="width:200px; height: 60px">
+                <div class="card-body d-flex align-items-center justify-content-center">
+
+                    <p class="card-text h6" style="text-decoration: none" href="#">{{$mesEscrito. (' de '). $anoAtual }} </p>
+                </div> 
+            </div>
+            </br>
+
             <div class="card bg-danger mx-auto " style="width:200px; height: 60px">
                 <div class="card-body d-flex align-items-center justify-content-center">
                     <a class="card-text text-white h6" style="text-decoration: none" href="{{url('pago/pago')}}">Despesa R${{$total_pago}} </a>

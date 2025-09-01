@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>    <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        @vite(['sources/js/app.js'])
+        <title>Document</title>
     </head>
     <body>
         @include ('objetivos.base')
@@ -21,7 +23,7 @@
                     <label class="mt-3" for="nome">Nome</label>
                     <input class="form-control" type="text" name="nome" placeholder="Name" required><br>
                 
-                    <button class="btn btn-success mt-5" type="submit">Editar</button>
+                    <button id="btnSend" class="btn btn-success mt-5" type="submit">Editar</button>
                 </div>
             </form>
         </main> 

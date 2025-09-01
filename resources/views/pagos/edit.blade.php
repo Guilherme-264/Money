@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>    <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        @vite(['resources/js/app.js'])
+        <title>Document</title>
     </head>
     <body>
         @include ('pagos.base')
@@ -22,7 +24,7 @@
                     <input type="text" class="form-control" name="nome" placeholder="Name" value="{{ $pago->nome }}" required>
 
                     <label class="mt-3" for="valor">Valor</label>
-                    <input class="form-control" type="number" name="valor" placeholder="valor" value="{{ $pago->valor }}"required>
+                    <input class="form-control" type="number" name="valor" placeholder="valor" step="0.01" value="{{ $pago->valor }}"required>
 
                     <label class="mt-3" for="descricao">Descrição</label>
                     <input class="form-control" type="text" name="descricao" placeholder="Descição" value="{{ $pago->descricao }}" required>
@@ -30,7 +32,7 @@
                     <label class="mt-3" data_recebido for="data_recebido">Data pagamento</label>
                     <input class="form-control" type="date" name="data_recebido" placeholder="Data pagamento" value="{{ $pago->data_recebido }}" required>
 
-                    <button class="btn btn-success mt-5" type="submit">Atualizar despesa</button>
+                    <button id="btnSend" class="btn btn-success mt-5" type="submit">Atualizar despesa</button>
                 </div>
             </form>
         </main>

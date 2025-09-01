@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>    <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        @vite (['resources/js/app.js'])
+        <title>Document</title>
     </head>
     <body>
         @include ('objetivos.base')
@@ -25,7 +27,7 @@
                     <input class="form-check-input" type="radio" name="destino" value= 1>
                     <label class="form-check-label" for= 1>Receber</label><br>
 
-                    <button class="btn btn-success mt-5" type="submit">Criar categoria</button>
+                    <button id="btnSend" class="btn btn-success mt-5" type="submit">Criar categoria</button>
                 </div>
             </form>
         </main>    
