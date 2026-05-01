@@ -1,9 +1,10 @@
 A fazer
 
-    -separar por mes despesas e receber
-        na tela principal, ao clicar em despesa por exemplo, o sistema exibira todos as despesas, ao ivé de apenas as despesas do mes atual
+        na tela principal, ao clicar em despesa por exemplo, o sistema exibira todos as despesas, ao ivés de apenas as despesas do mes atual
     -funcionalidade valor a receber ou a pagar no futuro
         ex financiamento, salario(médio)
+    -pesquisar sobre chart.js para implementar gráficos
+    
 
 
 
@@ -13,11 +14,8 @@ A fazer
 
 
 Fazendo
-
-
-
-
-
+    -separar por mes despesas e receber
+        na tela principal, ao clicar em despesa por exemplo, o sistema exibira todos as despesas, ao ivés de apenas as despesas do mes atual
 
 
 

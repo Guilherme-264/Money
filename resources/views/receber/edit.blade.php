@@ -3,38 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    @vite(['resources/js/app.js'])
-    <title>Document</title>
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    <title>Money</title>
 </head>
-    <body>
-        @include ('receber.base')
-                
-        
-        <main class=" container-fluid   p-4 text-center">
-            <form class="d-flex flex-column mx-auto w-25 bg-light" action="{{ url('receber/'.$receber->id) }}" method="POST">
-                <div class="container ">    
-                    @csrf
-                    @method ('PUT')
-                    <h2 class="text-success">Atualizar de Entrada</h2>
+<body class="bg-gray-100">
+    @include('receber.base')
 
-                    <label class="mt-3" for="nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" placeholder="Name" value="{{ $receber->nome }}" required>
+    <main class="container mx-auto px-4 py-6">
+        <form action="{{ url('receber/'.$receber->id) }}" method="POST"
+            class="bg-white rounded-2xl shadow-md mx-auto w-full md:w-1/3 px-8 py-6">
+            @csrf
+            @method('PUT')
 
-                    <label class="mt-3" for="valor">Valor</label>
-                    <input class="form-control" type="number" name="valor" placeholder="valor" step="0.01" value="{{ $receber->valor }}" required>
+            <h2 class="text-lg font-semibold text-green-600 mb-6 text-center">Atualizar Entrada</h2>
 
-                    <label class="mt-3" for="descricao">Descrição</label>
-                    <input class="form-control" type="text" name="descricao" placeholder="Descição" value="{{ $receber->descricao }}" required>
+            <div class="flex flex-col gap-4">
 
-                    <label class="mt-3" data_recebido for="data_recebido">Data pagamento</label>
-                    <input class="form-control" type="date" name="data_recebido" placeholder="Data pagamento" value="{{ $receber->data_recebido }}"required>
-
-                    <button id="btnSend" class="btn btn-success mt-5" type="submit">Atualizar de entrada</button>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm text-gray-600 font-medium" for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $receber->nome }}"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        required>
                 </div>
-            </form>
-        </main>
-    </body>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm text-gray-600 font-medium" for="valor">Valor</label>
+                    <input type="number" name="valor" id="valor" placeholder="0,00" step="0.01" value="{{ $receber->valor }}"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        required>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm text-gray-600 font-medium" for="descricao">Descrição</label>
+                    <input type="text" name="descricao" id="descricao" placeholder="Descrição" value="{{ $receber->descricao }}"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        required>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm text-gray-600 font-medium" for="data_recebido">Data pagamento</label>
+                    <input type="date" name="data_recebido" id="data_recebido" value="{{ $receber->data_recebido }}"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        required>
+                </div>
+
+                <button type="submit" id="btnSend"
+                    class="mt-2 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm font-semibold border-none transition">
+                    Atualizar entrada
+                </button>
+
+            </div>
+        </form>
+    </main>
+</body>
 </html>

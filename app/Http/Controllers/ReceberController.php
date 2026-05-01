@@ -10,21 +10,15 @@ use Illuminate\Http\Request;
 
 class ReceberController extends Controller
 {
-    public function index()
+    public function receber($mes, $ano)
     {
-        $mesAtual = Carbon::now()->month;
-        $receber = Receber::all();
-        $total_receber = 0;
-    foreach( $receber as $entity){
-        $total_receber += $entity->valor;
-    }
-        return view('pagos.index', compact('receber', 'total_receber'));
-    }
+        $anoAtual = (int) $ano;
+        $mesNumero = $this->getMesNumero($mes);
+    $receber = Receber::whereYear('data_recebido', $anoAtual)
+        ->whereMonth('data_recebido', $mesNumero)
+        ->get();
+    $total = 0;
 
-    public function receber()
-    {
-        $receber = Receber::all();
-        $total = 0;
     foreach( $receber as $entity){
         $total += $entity->valor;
     }
@@ -71,4 +65,8 @@ class ReceberController extends Controller
         $receber->delete();
         return redirect('pago')->with('success', 'Receber deleted successfully.');
     }
+    private function getMesNumero(string $mesNome): int {
+        $mesesDoAno = ['Janeiro' => 1, 'Fevereiro' => 2, 'Março' => 3, 'Abril' => 4, 'Maio' => 5, 'Junho' => 6, 'Julho' => 7, 'Agosto' => 8, 'Setembro' => 9, 'Outubro' => 10, 'Novembro' => 11, 'Dezembro' => 12];
+        return $mesesDoAno[$mesNome] ?? 0; // Retorna 0 se o mês não for encontrado
     }
+}

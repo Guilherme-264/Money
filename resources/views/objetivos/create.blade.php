@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-        @vite (['resources/js/app.js'])
-        <title>Document</title>
-    </head>
-    <body>
-        @include ('objetivos.base')
-        <main class=" container-fluid   p-4 text-center">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    <title>Money</title>
+</head>
+<body class="bg-gray-100">
+    @include('objetivos.base')
 
-            <form class="d-flex flex-column mx-auto w-25 bg-light" action="{{ url('objetivo') }}" method="POST">
-                @csrf
-                <div class="container">
-                    <h2 class="text-success">Cadastro de Categoria</h2>
+    <main class="container mx-auto px-4 py-6">
+        <form action="{{ url('objetivo') }}" method="POST"
+            class="bg-white rounded-2xl shadow-md mx-auto w-full md:w-1/3 px-8 py-6">
+            @csrf
 
-                    <label class="mt-3" for="nome">Nome</label>
-                    <input class="form-control" type="text" name="nome" placeholder="Name" required><br>
-                    
-                    <input class="form-check-input" type="radio" name="destino" value=0>
-                    <label class="form-check-label me-3" for= 0>Gasto</label>
+            <h2 class="text-lg font-semibold text-green-600 mb-6 text-center">Cadastro de Categoria</h2>
 
-                    <input class="form-check-input" type="radio" name="destino" value= 1>
-                    <label class="form-check-label" for= 1>Receber</label><br>
+            <div class="flex flex-col gap-4">
 
-                    <button id="btnSend" class="btn btn-success mt-5" type="submit">Criar categoria</button>
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm text-gray-600 font-medium" for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome" placeholder="Nome"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        required>
                 </div>
-            </form>
-        </main>    
-    </body>
+
+                <div class="flex flex-col gap-2">
+                    <span class="text-sm text-gray-600 font-medium">Tipo</span>
+                    <div class="flex gap-6 justify-center">
+                        <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                            <input type="radio" name="destino" value="0" class="accent-red-500">
+                            Gasto
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                            <input type="radio" name="destino" value="1" class="accent-green-500">
+                            Receber
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" id="btnSend"
+                    class="mt-2 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm font-semibold border-none transition">
+                    Criar categoria
+                </button>
+
+            </div>
+        </form>
+    </main>
+</body>
 </html>

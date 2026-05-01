@@ -16,9 +16,35 @@ class ObjetivoController extends Controller
         $pagos = Pago::all();
         $receber = Receber::all();
         $transferencias = $pagos->concat($receber);
-        
+
+        $arraytotal = [];
+
+        foreach($objetivos as $objetivo){
+            $total = 0;
+            foreach($transferencias as $transferencia){
+                if($transferencia->objetivo_Id == $objetivo->id){
+                    $total += $transferencia->valor;
+                }
+            }
     
-        return view('objetivos.objetivo', compact('objetivos', 'transferencias'));
+            $arraytotal[] = [
+            'label'   => $objetivo->nome,
+            'valor'   => $total,
+            'destino' => $objetivo->destino, // 0 = despesa, 1 = entrada
+            'id'      => $objetivo->id
+            ];
+        }
+        usort($arraytotal, function ($a, $b) {
+        return $a['destino'] <=> $b['destino'];
+        });
+
+        // separa para o gráfico
+        $arrayLabel   = array_column($arraytotal, 'label');
+        $arrayData    = array_column($arraytotal, 'valor');
+        $arrayDestino = array_column($arraytotal, 'destino');
+        $arrayId = array_column($arraytotal, 'id');
+
+        return view('objetivos.objetivo', compact('objetivos', 'transferencias', 'arrayLabel', 'arrayData', 'arrayDestino', 'arrayId'));
     }
 
     public function verObjetivo($id){

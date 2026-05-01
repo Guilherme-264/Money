@@ -5,53 +5,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>    <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>    
+        <title>Money</title>
+                @vite ('resources/css/app.css')
     </head>
-    <body>
-        @include ('pagos.base')
-        <main class=" container-fluid  p-5 text-center bg-light">
-            <div class="card text-bg-secondary mx-auto " style="width:200px; height: 60px">
-                <div class="card-body d-flex align-items-center justify-content-center">
+<body class="bg-gray-100">
+    @include('pagos.base')
+    <main class="flex flex-col items-center gap-4 p-8">
 
-                    <p class="card-text h6" style="text-decoration: none" href="#">{{$mesEscrito. (' de '). $anoAtual }} </p>
-                </div> 
-            </div>
-            </br>
+        {{-- Mês atual --}}
+        <div class="bg-gray-500 text-white rounded-xl px-6 py-3 font-semibold text-sm">
+            {{ $mesEscrito . ' de ' . $anoAtual }}
+        </div>
 
-            <div class="card bg-danger mx-auto " style="width:200px; height: 60px">
-                <div class="card-body d-flex align-items-center justify-content-center">
-                    <a class="card-text text-white h6" style="text-decoration: none" href="{{url('pago/pago')}}">Despesa R${{$total_pago}} </a>
-                </div>
-            </div>
-            <br/>   
+        {{-- Despesa --}}
+        <a href="{{ url('pago/pago/'.$mesEscrito.'/'.$anoAtual) }}"
+            class="bg-red-500 hover:bg-red-600 text-white rounded-xl px-6 py-3 font-semibold text-sm no-underline transition">
+            Despesa R$ {{ $total_pago }}
+        </a>
 
-            <div class="card bg-success mx-auto " style="width:200px; height: 60px">
-                <div class="card-body d-flex align-items-center justify-content-center">
-                    <a class="card-text text-white h6" style="text-decoration: none" href="{{url('receber/receber')}}">Entrada R${{$total_receber}} </a>
-                </div>
+        {{-- Entrada --}}
+        <a href="{{ url('receber/receber/'.$mesEscrito.'/'.$anoAtual) }}"
+            class="bg-green-500 hover:bg-green-600 text-white rounded-xl px-6 py-3 font-semibold text-sm no-underline transition">
+            Entrada R$ {{ $total_receber }}
+        </a>
+
+        {{-- Saldo --}}
+        @if($total >= 0)
+            <div class="bg-green-500 text-white rounded-xl px-6 py-3 font-semibold text-sm">
+                Saldo final R$ {{ $total }}
             </div>
-            <br/>   
-            
-            @if ($total >=0)
-                <div class="card bg-success  mx-auto " style="width:200px; height: 60px"> 
-                    <div class="card-body d-flex align-items-center justify-content-center">
-                        <p class="card-text text-white h6">Saldo final R${{$total}}</p>
-                    </div>
-                </div>
-    
-            @else
-                <div class="card bg-danger  mx-auto " style="width:200px; height: 60px"> 
-                    <div class="card-body d-flex align-items-center justify-content-center">
-                        <p class="card-text text-white h6">Saldo final R${{$total * -1}}</p>
-                    </div>
-                </div>
-            @endif
-            <br/>
-            <div class="card bg-secondary   mx-auto " style="width:200px; height: 60px"> 
-                <div class="card-body d-flex align-items-center justify-content-center"> 
-                    <a class="card-text text-white h6" style="text-decoration: none" href="{{url('objetivo')}}">Categorias</a>
-                </div>
+        @else
+            <div class="bg-red-500 text-white rounded-xl px-6 py-3 font-semibold text-sm">
+                Saldo final R$ {{ $total }}
             </div>
-        </main>
-    </body>
+        @endif
+
+        {{-- Categorias --}}
+        <a href="{{ url('objetivo') }}"
+            class="bg-gray-500 hover:bg-gray-600 text-white rounded-xl px-6 py-3 font-semibold text-sm no-underline transition">
+            Categorias
+        </a>
+
+    </main>
+</body>
 </html>

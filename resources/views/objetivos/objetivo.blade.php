@@ -1,42 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>    <title>Document</title>
-    </head>
-    <body>
-        @include ('objetivos.base')
-        <main class=" container-fluid  p-4 text-center">
-            @foreach($objetivos as $objetivo)
-                <div class="card bg-light  mx-auto mb-1 " style="width:40%;">
-                    <h3>{{ $objetivo->nome }}</h3>
-                    @if ($objetivo->destino == 0)
-                        <p>Despesa</p>
-                    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    @vite(['resources/js/app.js', 'resources/js/graficoObjetivo.js', 'resources/css/app.css'])
+    <title>Money</title>
+</head>
+<body class="bg-gray-100">
+    @include('objetivos.base')
+
+    <main class="container mx-auto px-4 py-6">
+        @php $contador = 0; @endphp
+        @foreach($objetivos as $objetivo)
+            <div class="bg-white rounded-2xl shadow-md mx-auto mb-3 w-full md:w-2/5">
+
+                <div class="px-6 py-4">
+                    <h3 class="text-lg font-semibold text-gray-800">{{ $arrayLabel[$contador] }}</h3>
+
+                    @if($arrayDestino[$contador] == 0)
+                        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-red-100 text-red-500">
+                            Despesa
+                        </span>
                     @else
-                        <p>Entrada</p>
-                    
+                        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-600">
+                            Entrada
+                        </span>
                     @endif
-                    
-                    @php $valorTotal = 0 @endphp 
-                    @foreach ($transferencias as $transferencia)
-                    
-                        @if ( $transferencia-> objetivo_Id == $objetivo -> id)
-                            
-                            @php $valorTotal += $transferencia -> valor @endphp
-                            
-                        @endif
-                    @endforeach
-                    <p>valor total: R${{ $valorTotal }}</p>
 
-                    
-                    <a class="btn btn-light mx-auto" href="{{ url('objetivo/'.$objetivo->id.'/ver') }}">Ver </a>
+                    <p class="text-gray-500 text-sm mt-2">Valor total: R$ {{ $arrayData[$contador] }}</p>
+                </div>
 
-                </div>                
-            @endforeach
-        </main>
-    </body>
+                <div class="blockborder-t border-gray-100">
+                    <a href="{{ url('objetivo/'.$arrayId[$contador].'/ver') }}"
+                        class="text-center block w-1/2 mx-auto py-2 text-sm text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition no-underline">
+                        Ver
+                    </a>
+                </div>
+
+            </div>
+            @php $contador++ @endphp
+        @endforeach
+
+        <canvas
+            id="grafico"
+            data-labels='@json($arrayLabel)'
+            data-data='@json($arrayData)'
+            data-destino='@json($arrayDestino)'
+            class="mx-auto w-full md:w-1/4 mt-6">
+        </canvas>
+    </main>
+</body>
 </html>
