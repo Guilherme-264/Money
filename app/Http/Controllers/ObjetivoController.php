@@ -6,15 +6,16 @@ use App\Models\Objetivo;
 use App\Models\Pago;
 use App\Models\Receber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ObjetivoController extends Controller
 {
     public function objetivo()
     {
-        
-        $objetivos = Objetivo::all();
-        $pagos = Pago::all();
-        $receber = Receber::all();
+        $userId = Auth::id();
+        $objetivos = Objetivo::where('user_id', $userId)->get();
+        $pagos = Pago::where('user_id', $userId)->get();
+        $receber = Receber::where('user_id', $userId)->get();
         $transferencias = $pagos->concat($receber);
 
         $arraytotal = [];
@@ -26,72 +27,75 @@ class ObjetivoController extends Controller
                     $total += $transferencia->valor;
                 }
             }
-    
+
             $arraytotal[] = [
-            'label'   => $objetivo->nome,
-            'valor'   => $total,
-            'destino' => $objetivo->destino, // 0 = despesa, 1 = entrada
-            'id'      => $objetivo->id
+                'label'   => $objetivo->nome,
+                'valor'   => $total,
+                'destino' => $objetivo->destino,
+                'id'      => $objetivo->id
             ];
         }
+
         usort($arraytotal, function ($a, $b) {
-        return $a['destino'] <=> $b['destino'];
+            return $a['destino'] <=> $b['destino'];
         });
 
-        // separa para o gráfico
         $arrayLabel   = array_column($arraytotal, 'label');
         $arrayData    = array_column($arraytotal, 'valor');
         $arrayDestino = array_column($arraytotal, 'destino');
-        $arrayId = array_column($arraytotal, 'id');
+        $arrayId      = array_column($arraytotal, 'id');
 
         return view('objetivos.objetivo', compact('objetivos', 'transferencias', 'arrayLabel', 'arrayData', 'arrayDestino', 'arrayId'));
     }
 
-    public function verObjetivo($id){
-        $objetivo = Objetivo::findOrFail($id);
-        if($objetivo->destino == 0){
-            $transferencias = Pago::all();
+    public function verObjetivo($id)
+    {
+        $objetivo = Objetivo::where('user_id', Auth::id())->findOrFail($id);
 
-        }else{
-            $transferencias = Receber::all();
+        if($objetivo->destino == 0){
+            $transferencias = Pago::where('user_id', Auth::id())
+                                  ->where('objetivo_Id', $id)
+                                  ->get();
+        } else {
+            $transferencias = Receber::where('user_id', Auth::id())
+                                     ->where('objetivo_Id', $id)
+                                     ->get();
         }
 
-        
-       
-
-    
         return view('objetivos.valoresObjetivos', compact('objetivo', 'transferencias'));
     }
-    
-    
+
     public function create()
     {
         return view('Objetivos.create');
     }
-    
+
     public function store(Request $request)
     {
-        Objetivo::create($request->all());
-        return redirect('pago')->with('success', 'objetivo created successfully.');
+        Objetivo::create([
+            ...$request->all(),
+            'user_id' => Auth::id(),
+        ]);
+        return redirect('pago')->with('success', 'Objetivo criado com sucesso.');
     }
-    
+
     public function edit($id)
     {
-        $objetivo = Objetivo::findOrFail($id);
+        $objetivo = Objetivo::where('user_id', Auth::id())->findOrFail($id);
         return view('objetivos.edit', compact('objetivo'));
     }
-    
+
     public function update(Request $request, $id)
     {
-        $objetivo = Objetivo::findOrFail($id);
+        $objetivo = Objetivo::where('user_id', Auth::id())->findOrFail($id);
         $objetivo->update($request->all());
-        return redirect('objetivo')->with('success', 'Objetivo updated successfully.');
+        return redirect('objetivo')->with('success', 'Objetivo atualizado com sucesso.');
     }
-    
+
     public function destroy($id)
     {
-        $objetivo = Objetivo::findOrFail($id);
+        $objetivo = Objetivo::where('user_id', Auth::id())->findOrFail($id);
         $objetivo->delete();
-        return redirect('pago')->with('success', 'Objetivo deleted successfully.');
+        return redirect('pago')->with('success', 'Objetivo deletado com sucesso.');
     }
 }

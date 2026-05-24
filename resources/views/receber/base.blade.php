@@ -40,5 +40,23 @@
             </ul>
         </div>
 
+        <div class="dropdown dropstart">
+            <button type="button" class="border-none transition"
+                data-bs-toggle="dropdown" title="Usuário"
+                style="background-color: #7c3aed; border-radius: 50%; width: 36px; height: 36px; color: white; font-weight: bold; font-size: 16px; display: flex; align-items: center; justify-content: center;">
+                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><span class="dropdown-item-text text-muted">{{ Auth::user()->name }}</span></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="dropdown-item text-danger">Sair</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </nav>

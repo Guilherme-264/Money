@@ -3,20 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Receber extends Model
 {
-    protected $fillable=
-    [
-        'valor',
-        'nome',
-        'descricao',
-        'data_recebido',
-        'objetivo_Id'
-    ];
+    protected $fillable = ['user_id', 'valor', 'nome', 'descricao', 'data_recebido', 'objetivo_Id'];
 
-    public function objetivo():BelongsTo
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function objetivo()
     {
         return $this->belongsTo(Objetivo::class, 'objetivo_Id');
     }

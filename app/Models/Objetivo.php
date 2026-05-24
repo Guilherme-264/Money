@@ -3,23 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Objetivo extends Model
 {
-    protected $fillable=[
-        'nome',
-        'destino'
-    ];
+    protected $fillable = ['user_id', 'nome', 'destino'];
 
-    public function pago(): HasMany
+    public function user()
     {
-        return $this ->hasMany(Pago::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function Receber(): HasMany
+    public function pagos()
     {
-        return $this ->hasMany(Receber::class);
+        return $this->hasMany(Pago::class, 'objetivo_Id');
+    }
+
+    public function recebers()
+    {
+        return $this->hasMany(Receber::class, 'objetivo_Id');
     }
 }
-
