@@ -67,7 +67,7 @@ class ObjetivoController extends Controller
 
     public function create()
     {
-        return view('Objetivos.create');
+        return view('objetivos.create');
     }
 
     public function store(Request $request)
