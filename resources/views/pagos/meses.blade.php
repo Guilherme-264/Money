@@ -9,8 +9,7 @@
         <script>
             window.anoAtual = @json($anoAtual);
         </script>
-        @vite (['resources/js/meses.js',     
-                'resources/js/graficoMes.js',
+        @vite (['resources/js/app.js',
                 'resources/css/app.css'
 
             ])
@@ -31,7 +30,6 @@
                     <div class="flex items-center gap-5">
                         <button type="button" id="btnMenos"
                             class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 active:scale-95 text-gray-600 text-2xl flex items-center justify-center transition disabled:opacity-30 disabled:cursor-not-allowed">
-                            −
                         </button>
 
                         <span id="anoDisplay" data-ano="{{ $anoAtual }}"
