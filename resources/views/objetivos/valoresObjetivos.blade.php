@@ -33,7 +33,7 @@
             <div class="px-6 py-4 text-sm text-gray-600 divide-y divide-gray-100">
                 @php $valor = 0; @endphp
                 @foreach($transferencias as $transferencia)
-                    @if($transferencia->objetivo_Id == $objetivo->id)
+                    @if($transferencia->objetivo_id == $objetivo->id)
                         <div class="py-2 flex justify-between">
                             <span>{{ $situacao }}: {{ $transferencia->nome }}</span>
                             <span class="font-medium text-gray-800">R$ {{ $transferencia->valor }}</span>
