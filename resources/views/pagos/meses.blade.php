@@ -9,10 +9,7 @@
         <script>
             window.anoAtual = @json($anoAtual);
         </script>
-        @vite (['resources/js/app.js',
-                'resources/css/app.css'
-
-            ])
+        @vite (['resources/js/app.js', 'resources/css/app.css'])
         <title>Money</title>
     </head>
 <body class="bg-gray-100">
