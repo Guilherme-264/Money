@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Receber extends Model
 {
-    protected $fillable = ['user_id', 'valor', 'nome', 'descricao', 'data_recebido', 'objetivo_Id'];
+    protected $fillable = ['user_id', 'valor', 'nome', 'descricao', 'data_recebido', 'objetivo_id'];
 
     public function user()
     {
@@ -15,6 +15,6 @@ class Receber extends Model
 
     public function objetivo()
     {
-        return $this->belongsTo(Objetivo::class, 'objetivo_Id');
+        return $this->belongsTo(Objetivo::class, 'objetivo_id');
     }
 }

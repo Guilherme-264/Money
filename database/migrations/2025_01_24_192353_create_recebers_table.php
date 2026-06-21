@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nome', 200);
             $table->string('descricao', 255);
             $table->date('data_recebido');
-            $table->foreignId( 'objetivo_Id')->references('id')->on('objetivos') ;
+            $table->foreignId( 'objetivo_id')->references('id')->on('objetivos') ;
 
 
         });

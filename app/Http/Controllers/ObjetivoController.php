@@ -23,7 +23,7 @@ class ObjetivoController extends Controller
         foreach($objetivos as $objetivo){
             $total = 0;
             foreach($transferencias as $transferencia){
-                if($transferencia->objetivo_Id == $objetivo->id){
+                if($transferencia->objetivo_id == $objetivo->id){
                     $total += $transferencia->valor;
                 }
             }
@@ -54,11 +54,11 @@ class ObjetivoController extends Controller
 
         if($objetivo->destino == 0){
             $transferencias = Pago::where('user_id', Auth::id())
-                                  ->where('objetivo_Id', $id)
+                                  ->where('objetivo_id', $id)
                                   ->get();
         } else {
             $transferencias = Receber::where('user_id', Auth::id())
-                                     ->where('objetivo_Id', $id)
+                                     ->where('objetivo_id', $id)
                                      ->get();
         }
 

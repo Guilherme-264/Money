@@ -15,11 +15,11 @@ class Objetivo extends Model
 
     public function pagos()
     {
-        return $this->hasMany(Pago::class, 'objetivo_Id');
+        return $this->hasMany(Pago::class, 'objetivo_id');
     }
 
     public function recebers()
     {
-        return $this->hasMany(Receber::class, 'objetivo_Id');
+        return $this->hasMany(Receber::class, 'objetivo_id');
     }
 }

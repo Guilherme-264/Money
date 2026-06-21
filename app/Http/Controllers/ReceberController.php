@@ -41,7 +41,7 @@ class ReceberController extends Controller
             'valor'        => 'required',
             'descricao'    => 'required',
             'data_recebido'=> 'required',
-            'objetivo_Id'  => 'required'
+            'objetivo_id'  => 'required'
         ]);
 
         Receber::create([
