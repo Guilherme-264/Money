@@ -10,6 +10,7 @@
             window.anoAtual = @json($anoAtual);
         </script>
         @vite (['resources/js/app.js', 'resources/css/app.css'])
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         <title>Money</title>
     </head>
 <body class="bg-gray-100">
@@ -21,12 +22,13 @@
             <form method="GET" action="{{ url('pago/meses') }}" id="formAno">
                 <input type="hidden" name="ano" id="anoInput" value="{{ $anoAtual }}">
 
-                <div class="inline-flex flex-col items-center gap-3 bg-white rounded-2xl px-8 py-6 shadow-md">
+                <div class="inline-flex flex-col items-center gap-3 bg-white rounded-2xl px-8 py-6 shadow-md w-full max-w-xs">
                     <span class="text-xs font-semibold tracking-widest uppercase text-gray-400">Selecione o ano</span>
 
                     <div class="flex items-center gap-5">
                         <button type="button" id="btnMenos"
                             class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 active:scale-95 text-gray-600 text-2xl flex items-center justify-center transition disabled:opacity-30 disabled:cursor-not-allowed">
+                            -
                         </button>
 
                         <span id="anoDisplay" data-ano="{{ $anoAtual }}"

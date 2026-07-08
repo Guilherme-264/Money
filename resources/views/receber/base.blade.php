@@ -1,20 +1,14 @@
-<header class="bg-black py-3">
-    <h1 class="text-center">
+<nav class="bg-gray-900 px-4 py-2">
+
+    <div class="flex justify-between items-center">
+
+    {{-- Logo à esquerda --}}
+    <h1 class="text-left mb-0">
         <a class="text-green-500 no-underline text-2xl font-bold" href="{{ url('pago/') }}">Money$</a>
     </h1>
-</header>
 
-<nav class="bg-gray-900 px-4 py-2">
-    <div class="flex justify-end items-center gap-4">
-
-        {{-- Início --}}
-        <a href="{{ url('pago/') }}" class="text-white hover:text-green-400 transition"
-            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Início">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
-                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
-            </svg>
-        </a>
+    {{-- Itens à direita --}}
+    <div class="flex items-center gap-4">
 
         {{-- Meses --}}
         <a href="{{ url('pago/meses/') }}" class="text-white hover:text-green-400 transition"
@@ -40,6 +34,7 @@
             </ul>
         </div>
 
+        {{-- Usuário --}}
         <div class="dropdown dropstart">
             <button type="button" class="border-none transition"
                 data-bs-toggle="dropdown" title="Usuário"
@@ -59,4 +54,5 @@
         </div>
 
     </div>
+</div>
 </nav>
