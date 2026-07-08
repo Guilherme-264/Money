@@ -1,17 +1,3 @@
-<script>
-    (() => {
-        const iconHref = '{{ asset('favicon.ico') }}';
-        document.querySelectorAll('link[rel~="icon"]').forEach((link) => link.remove());
-        const link = document.createElement('link');
-        link.rel = 'icon';
-        link.type = 'image/png';
-        link.href = iconHref;
-        document.head.appendChild(link);
-    })();
-</script>
-
-
-
 <nav class="bg-gray-900 px-4 py-2">
 
     <div class="flex justify-between items-center">
