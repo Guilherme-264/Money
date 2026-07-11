@@ -42,6 +42,13 @@ class ReceberController extends Controller
             'descricao'    => 'required',
             'data_recebido'=> 'required',
             'objetivo_id'  => 'required'
+        ],
+        [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'valor.required' => 'O campo valor é obrigatório.',
+            'descricao.required' => 'O campo descrição é obrigatório.',
+            'data_recebido.required' => 'O campo data de recebimento é obrigatório.',
+            'objetivo_id.required' => 'O campo objetivo é obrigatório.'
         ]);
 
         Receber::create([
@@ -54,6 +61,7 @@ class ReceberController extends Controller
 
     public function edit($id)
     {
+        
         $receber = Receber::where('user_id', Auth::id())->findOrFail($id);
         $objetivos = Objetivo::where('user_id', Auth::id())->get();
         return view('receber.edit', compact('receber', 'objetivos'));
@@ -61,6 +69,21 @@ class ReceberController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nome'         => 'required',
+            'valor'        => 'required',
+            'descricao'    => 'required',
+            'data_recebido'=> 'required',
+            'objetivo_id'  => 'required'
+        ],
+        [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'valor.required' => 'O campo valor é obrigatório.',
+            'descricao.required' => 'O campo descrição é obrigatório.',
+            'data_recebido.required' => 'O campo data de recebimento é obrigatório.',
+            'objetivo_id.required' => 'O campo objetivo é obrigatório.'
+        ]);
+
         $receber = Receber::where('user_id', Auth::id())->findOrFail($id);
         $receber->update($request->all());
         return redirect('pago')->with('success', 'Receber atualizado com sucesso.');

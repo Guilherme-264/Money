@@ -7,6 +7,7 @@ import './graficoMes';
 import './pago'
 import Alpine from 'alpinejs';
 import './meses'
+import './validarForm'
 
 
 window.Alpine = Alpine;

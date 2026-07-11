@@ -26,29 +26,46 @@
                 <div class="flex flex-col gap-1">
                     <label class="text-sm text-gray-600 font-medium" for="nome">Nome</label>
                     <input type="text" name="nome" id="nome" placeholder="Nome"
-                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300
+                        @error('nome') !border-red-500 focus:ring-red-300 @else border-gray-200 focus:ring-green-300 @enderror"
                         required>
+                        @error('nome')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                 </div>
 
                 <div class="flex flex-col gap-1">
                     <label class="text-sm text-gray-600 font-medium" for="valor">Valor</label>
                     <input type="number" name="valor" id="valor" placeholder="0,00" step="0.01"
-                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300
+                        @error('valor') !border-red-500 focus:ring-red-300 @else border-gray-200 focus:ring-green-300 @enderror"
                         required>
+                        @error('valor')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                 </div>
 
                 <div class="flex flex-col gap-1">
                     <label class="text-sm text-gray-600 font-medium" for="descricao">Descrição</label>
                     <input type="text" name="descricao" id="descricao" placeholder="Descrição"
-                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300
+                        @error('descricao') !border-red-500 focus:ring-red-300 @else border-gray-200 focus:ring-green-300 @enderror"
+
                         required>
+                        @error('descricao')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                 </div>
 
                 <div class="flex flex-col gap-1">
                     <label class="text-sm text-gray-600 font-medium" for="data_recebido">Data pagamento</label>
                     <input type="date" name="data_recebido" id="data_recebido"
-                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                        class="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300
+                        @error('data_recebido') !border-red-500 focus:ring-red-300 @else border-gray-200 focus:ring-green-300 @enderror"
                         required>
+                        @error('data_recebido')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                 </div>
 
                 <div class="flex flex-col gap-1">

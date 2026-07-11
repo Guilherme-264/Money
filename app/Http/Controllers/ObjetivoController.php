@@ -70,14 +70,23 @@ class ObjetivoController extends Controller
         return view('objetivos.create');
     }
 
-    public function store(Request $request)
-    {
-        Objetivo::create([
-            ...$request->all(),
-            'user_id' => Auth::id(),
-        ]);
-        return redirect('pago')->with('success', 'Objetivo criado com sucesso.');
-    }
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'nome' => 'required|string|max:255',
+        'destino' => 'required|in:0,1',
+    ],[
+        'nome.required' => 'O campo nome é obrigatório.',
+        'destino.required' => 'O campo destino é obrigatório.',
+    ]);
+
+    Objetivo::create([
+        ...$validated,
+        'user_id' => Auth::id(),
+    ]);
+
+    return redirect('pago')->with('success', 'Objetivo criado com sucesso.');
+}
 
     public function edit($id)
     {
@@ -88,7 +97,14 @@ class ObjetivoController extends Controller
     public function update(Request $request, $id)
     {
         $objetivo = Objetivo::where('user_id', Auth::id())->findOrFail($id);
-        $objetivo->update($request->all());
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'destino' => 'required',
+        ],[
+            'nome.required' => 'O campo nome é obrigatório.'
+        ]);        
+        $objetivo->update($validated);
+
         return redirect('objetivo')->with('success', 'Objetivo atualizado com sucesso.');
     }
 
