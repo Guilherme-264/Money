@@ -31,14 +31,17 @@ class ReceberController extends Controller
     public function create()
     {
         $objetivos = Objetivo::where('user_id', Auth::id())->get();
-        if ($objetivos->isEmpty()) {
+        foreach($objetivos as $objetivo){
+            if($objetivo->destino == 1){
+                return view('receber.create', compact('objetivos'));
+
+            }
+        }
             return redirect('objetivo/create')->
             with('aviso', 'Você precisa criar um objetivo antes de criar um receber.')->
             with('objetivo-sugerido', '1');
-        }
-        else{
-            return view('receber.create', compact('objetivos'));
-        }
+        
+
         return view('receber.create', compact('objetivos'));
     }
 

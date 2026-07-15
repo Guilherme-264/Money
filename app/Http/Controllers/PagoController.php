@@ -117,14 +117,16 @@ class PagoController extends Controller
     public function create()
     {
         $objetivos = Objetivo::where('user_id', Auth::id())->get();
-        if ($objetivos->isEmpty()) {
-            return redirect('objetivo/create')->
-            with('aviso', 'Você precisa criar um objetivo antes de criar um gasto.')->
-            with('objetivo-sugerido', '0');
-        }
-        else{
-            return view('pagos.create', compact('objetivos'));
-        }
+        foreach($objetivos as $objetivo){
+            if($objetivo->destino == 0){
+                return view('pagos.create', compact('objetivos'));
+
+            }
+        }            
+        return redirect('objetivo/create')->
+        with('aviso', 'Você precisa criar um objetivo antes de criar um gasto.')->
+        with('objetivo-sugerido', '0');
+
     }
 
     public function store(Request $request)
