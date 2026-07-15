@@ -16,6 +16,13 @@
     @include('objetivos.base')
 
     <main class="container mx-auto px-4 py-6">
+        @if(session('aviso'))
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
+                <p class="font-bold">Aviso</p>
+                <p>{{ session('aviso') }}</p>
+            </div>
+        @endif
+
         <form action="{{ url('objetivo') }}" method="POST"
             class="bg-white rounded-2xl shadow-md mx-auto w-full md:w-1/3 px-8 py-6">
             @csrf
@@ -42,11 +49,11 @@
                     <span class="text-sm text-gray-600 font-medium">Tipo</span>
                     <div class="flex gap-6 justify-center">
                         <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-                            <input type="radio" name="destino" value="0" class="accent-red-500">
+                            <input {{ session('objetivo-sugerido') == '0' ? 'checked' : '' }} type="radio" name="destino" value="0" class="accent-red-500">
                             Gasto
                         </label>
                         <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-                            <input type="radio" name="destino" value="1" class="accent-green-500">
+                            <input {{ session('objetivo-sugerido') == '1' ? 'checked' : '' }} type="radio" name="destino" value="1" class="accent-green-500">
                             Receber
                         </label>
                     </div>
